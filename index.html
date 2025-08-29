@@ -19,7 +19,7 @@
     }
     .calculator {
       width: 360px;
-      background: rgba(20, 20, 40, 0.9);
+      background: rgba(20, 20, 40, 0.95);
       padding: 25px;
       border-radius: 18px;
       box-shadow: 0 0 25px rgba(0, 200, 255, 0.6);
@@ -42,6 +42,29 @@
       outline: none;
       box-shadow: inset 0 0 10px rgba(0,200,255,0.3);
       letter-spacing: 1px;
+      margin-bottom: 20px;
+    }
+    .buttons {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    button {
+      padding: 20px;
+      font-size: 20px;
+      border: none;
+      border-radius: 10px;
+      background: rgba(0, 255, 255, 0.1);
+      color: #0ff;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    button:hover {
+      background: rgba(0, 255, 255, 0.3);
+      box-shadow: 0 0 10px rgba(0, 200, 255, 0.5);
+    }
+    .operator {
+      background: rgba(0, 200, 255, 0.3);
     }
     p {
       margin-top: 15px;
@@ -56,26 +79,45 @@
 </head>
 <body>
   <div class="calculator">
-    <input type="text" id="display" readonly placeholder="Type with keyboard...">
-    <p>💡 Use your <span>keyboard</span>: numbers + operators (+ − × ÷). Press <span>Enter</span> to calculate, <span>Backspace</span> to clear.</p>
+    <input type="text" id="display" readonly placeholder="Type with keyboard or click...">
+    <div class="buttons">
+      <button>7</button>
+      <button>8</button>
+      <button>9</button>
+      <button class="operator">/</button>
+
+      <button>4</button>
+      <button>5</button>
+      <button>6</button>
+      <button class="operator">*</button>
+
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button class="operator">-</button>
+
+      <button>0</button>
+      <button>.</button>
+      <button class="operator">+</button>
+      <button class="operator" id="equals">=</button>
+
+      <button id="clear" style="grid-column: span 4; background: rgba(255,0,0,0.3);">C</button>
+    </div>
+    <p>💡 Use your <span>keyboard</span> or <span>click</span> buttons: numbers + operators (+ − × ÷). Press <span>Enter</span> or <span>=</span> to calculate.</p>
   </div>
 
   <script>
     const display = document.getElementById("display");
+    const buttons = document.querySelectorAll("button");
     let expression = "";
 
+    // Keyboard input
     document.addEventListener("keydown", (e) => {
       if (/[0-9+\-*/.]/.test(e.key)) {
         expression += e.key;
         display.value = expression;
       } else if (e.key === "Enter") {
-        try {
-          expression = eval(expression).toString();
-          display.value = expression;
-        } catch {
-          display.value = "Error";
-          expression = "";
-        }
+        calculate();
       } else if (e.key === "Backspace") {
         expression = expression.slice(0, -1);
         display.value = expression;
@@ -84,6 +126,31 @@
         display.value = "";
       }
     });
+
+    // Button input
+    buttons.forEach(btn => {
+      btn.addEventListener("click", () => {
+        if (btn.id === "equals") {
+          calculate();
+        } else if (btn.id === "clear") {
+          expression = "";
+          display.value = "";
+        } else {
+          expression += btn.textContent;
+          display.value = expression;
+        }
+      });
+    });
+
+    function calculate() {
+      try {
+        expression = eval(expression).toString();
+        display.value = expression;
+      } catch {
+        display.value = "Error";
+        expression = "";
+      }
+    }
   </script>
 </body>
 </html>
