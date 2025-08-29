@@ -1,2 +1,14 @@
-# keyboard-calculator
-Free Online Calculator Tool – 100% keyboard friendly, no mouse needed. Type numbers and operators (+ – × ÷), press Enter to calculate instantly. Fast, simple, and mobile-friendly. Perfect for students, professionals, and everyday quick math tasks.
+# Futuristic Online Calculator
+
+A **free online calculator** with a modern AI-inspired interface. Fully **keyboard-friendly**, easy to use, and fast for all calculations.  
+
+🔗 **Live Calculator:** https://millat-fullstack.github.io/keyboard-calculator/  
+
+### Features
+- Keyboard input support (+ − × ÷)
+- Mouse-click button interface
+- Fast and accurate results
+- Futuristic, neon-inspired design
+
+### Keywords
+Free Online Calculator Tool, Keyboard Calculator, Fast Calculator, AI Calculator, Modern Calculator
